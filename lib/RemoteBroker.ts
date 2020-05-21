@@ -3,7 +3,9 @@ import { ServiceBroker } from 'moleculer';
 import { BaseBroker } from './BaseBroker';
 
 export class RemoteBroker extends BaseBroker {
-	private broker = new ServiceBroker();
+	private broker = new ServiceBroker({
+		transporter: 'TCP',
+	});
 
 	private started: Promise<void>;
 
@@ -24,9 +26,11 @@ export class RemoteBroker extends BaseBroker {
 		});
 	}
 
-	async call(method: string, data: any): Promise<any> {
+	async call(service: string, data: any): Promise<any> {
+		const method = `${ service }.call`;
 		this.log('calling', method);
 		await this.started;
-		return this.broker.call(`${ method }.call`, data);
+		await this.broker.waitForServices(service);
+		return this.broker.call(method, data);
 	}
 }
