@@ -15,7 +15,8 @@ export abstract class BaseBroker {
 	abstract register(name: string, method: Function): void;
 
 	registerInstance(instance: object): void {
-		for (const method of Object.getOwnPropertyNames(Object.getPrototypeOf(instance))) {
+		const methods = instance.constructor?.name === 'Object' ? Object.getOwnPropertyNames(instance) : Object.getOwnPropertyNames(Object.getPrototypeOf(instance));
+		for (const method of methods) {
 			if (method === 'constructor') {
 				continue;
 			}
