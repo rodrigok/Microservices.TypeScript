@@ -1,5 +1,5 @@
-import { broker } from '../lib/broker';
-import { IAuthorization } from '../definition/IAuthorization';
+import { broker } from '../sdk/broker';
+import { IAuthorization } from '../sdk/definition/IAuthorization';
 
 // Register as class
 class Authorization implements IAuthorization {

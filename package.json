@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "monolit": "nodemon index.ts",
+    "authorization": "nodemon services/Authorization.ts",
+    "cron": "nodemon services/Cron.ts"
   },
   "author": "",
   "license": "MIT",
